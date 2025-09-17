@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tes Kepribadian DISC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container" id="intro-container">
+        <img src="logo.png" alt="Logo Perusahaan" class="logo">
+        <h1>Tes Kepribadian DISC</h1>
+        <p>Pilih satu pernyataan yang **PALING** menggambarkan Anda dan satu yang **PALING TIDAK**.</p>
+        <button id="start-button">Mulai Tes</button>
+    </div>
+
+    <div class="container hidden" id="quiz-container">
+        <h2 id="question-text"></h2>
+        <div class="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
+        <form id="quiz-form">
+            <div class="radio-labels">
+                <span class="label">Paling</span>
+                <span class="label">Paling Tidak</span>
+            </div>
+            <div id="options-container">
+                </div>
+            <button type="submit" id="next-button">Selanjutnya</button>
+        </form>
+    </div>
+
+    <div class="container hidden" id="result-container">
+        <h2 id="result-title">Hasil Kepribadian DISC Anda</h2>
+        <div id="result-scores">
+            </div>
+        <p id="result-description">Untuk penjelasan lebih detail dari kepribadian Anda, akan dijelaskan dalam sesi bersama Mas Ali Mahfud.</p>
+        <button id="restart-button">Ulangi Tes</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
