@@ -13,7 +13,10 @@
         <img src="logo.png" alt="Logo Perusahaan" class="logo">
         <h1>Tes Kepribadian DISC</h1>
         <p>Pilih satu pernyataan yang **PALING** menggambarkan Anda dan satu yang **PALING TIDAK**.</p>
-        <button id="start-button">Mulai Tes</button>
+        <form id="start-form">
+            <input type="text" id="user-name" placeholder="Nama Lengkap Anda" required>
+            <button type="submit" id="start-button">Mulai Tes</button>
+        </form>
     </div>
 
     <div class="container hidden" id="quiz-container">
@@ -23,8 +26,9 @@
         </div>
         <form id="quiz-form">
             <div class="radio-labels">
-                <span class="label">Paling</span>
-                <span class="label">Paling Tidak</span>
+                <span class="label">Paling</span> 
+                <span class="label">Tidak</span>
+                <span class="label">Pernyataan</span>
             </div>
             <div id="options-container">
                 </div>
@@ -33,10 +37,8 @@
     </div>
 
     <div class="container hidden" id="result-container">
-        <h2 id="result-title">Hasil Kepribadian DISC Anda</h2>
-        <div id="result-scores">
-            </div>
-        <p id="result-description">Untuk penjelasan lebih detail dari kepribadian Anda, akan dijelaskan dalam sesi bersama Mas Ali Mahfud.</p>
+        <h2 id="result-title"></h2>
+        <p id="result-description"></p>
         <button id="restart-button">Ulangi Tes</button>
     </div>
 
