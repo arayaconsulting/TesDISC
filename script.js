@@ -1,4 +1,4 @@
-// Data Pertanyaan DISC (Paling & Paling Tidak)
+// Data Pertanyaan DISC (24 Pertanyaan Penuh)
 const quizQuestions = [
     {
         question: "1. Saat dihadapkan pada keputusan penting, saya cenderung:",
@@ -222,16 +222,19 @@ const discNames = {
     "D": "Dominance",
     "I": "Influence",
     "S": "Steadiness",
-    "C": "Conscientiousness"
+    "C": "Compliance"
 };
 
 let currentQuestionIndex = 0;
+let userName = "";
 let scores = { "D": 0, "I": 0, "S": 0, "C": 0 };
 let scoresLeast = { "D": 0, "I": 0, "S": 0, "C": 0 };
 
 const introContainer = document.getElementById('intro-container');
 const quizContainer = document.getElementById('quiz-container');
 const resultContainer = document.getElementById('result-container');
+const startForm = document.getElementById('start-form'); 
+const userNameInput = document.getElementById('user-name');
 const startButton = document.getElementById('start-button');
 const restartButton = document.getElementById('restart-button');
 const questionText = document.getElementById('question-text');
@@ -243,6 +246,12 @@ const resultDescription = document.getElementById('result-description');
 const quizForm = document.getElementById('quiz-form');
 
 function startQuiz() {
+    userName = userNameInput.value.trim();
+    if (userName === "") {
+        alert("Mohon masukkan Nama Lengkap Anda sebelum memulai tes.");
+        return;
+    }
+
     introContainer.classList.add('hidden');
     quizContainer.classList.remove('hidden');
     currentQuestionIndex = 0;
@@ -253,7 +262,8 @@ function startQuiz() {
 
 function showQuestion() {
     if (currentQuestionIndex < quizQuestions.length) {
-        questionText.textContent = `(${currentQuestionIndex + 1}/24) Pilih yang PALING dan PALING TIDAK menggambarkan Anda:`;
+        // PERBAIKAN 3: Perbaiki tampilan nomor pertanyaan
+        questionText.textContent = `(${currentQuestionIndex + 1}/${quizQuestions.length}) Pilih yang PALING dan PALING TIDAK menggambarkan Anda:`;
         optionsContainer.innerHTML = '';
         
         quizQuestions[currentQuestionIndex].options.forEach((option, index) => {
@@ -281,7 +291,7 @@ function showQuestion() {
             optionsContainer.appendChild(optionRow);
         });
 
-        const progress = ((currentQuestionIndex) / quizQuestions.length) * 100;
+        const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
         progressBar.style.width = `${progress}%`;
         
     } else {
@@ -316,6 +326,7 @@ function calculateAndShowResult() {
 
     let dominantDiscType = '';
     let maxDiscScore = -100;
+    
     for (const type in scores) {
         const finalScore = scores[type] - scoresLeast[type];
         if (finalScore > maxDiscScore) {
@@ -324,8 +335,8 @@ function calculateAndShowResult() {
         }
     }
     
-    resultTitle.textContent = `Hasil Kepribadian DISC Anda: ${discNames[dominantDiscType]}`;
-    resultDescription.textContent = "Untuk penjelasan lebih detail dari kepribadian tersebut, akan dijelaskan dalam sesi bersama Mas Ali Mahfud.";
+    resultTitle.textContent = `Hasil Kepribadian DISC ${userName}: ${discNames[dominantDiscType]}`;
+    resultDescription.textContent = `Halo ${userName}, ini adalah tipe kepribadian dominan Anda. Untuk penjelasan lebih detail, akan dijelaskan dalam sesi bersama Mas Ali Mahfud.`;
 }
 
 function restartQuiz() {
@@ -335,7 +346,13 @@ function restartQuiz() {
     scores = { "D": 0, "I": 0, "S": 0, "C": 0 };
     scoresLeast = { "D": 0, "I": 0, "S": 0, "C": 0 };
     quizForm.reset();
+    document.getElementById('start-form').reset();
 }
 
-startButton.addEventListener('click', startQuiz);
+// Event Listeners
+startForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    startQuiz();
+});
+
 restartButton.addEventListener('click', restartQuiz);
